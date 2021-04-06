@@ -1,0 +1,20 @@
+ .modalWrapper{
+ 
+  
+      width: 700px;
+      z-index: 3;
+      height: 0;
+      
+    
+}
+.modalStyle{
+z-index: 2;
+} 
+.linkImage{
+      color: blue;
+      cursor: pointer;
+
+}
+.linkImage:hover{
+text-underline-position: above;
+}
