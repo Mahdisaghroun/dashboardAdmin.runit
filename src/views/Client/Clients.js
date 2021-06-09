@@ -44,6 +44,7 @@ export default function Clients() {
             { id: 42, nom: 'Ford Prefect', enregistré: '2001/05/25', role: 'Alien', solde: '0' }
       ]
       const [modal, setModal] = useState(false);
+      const [usersData, usersData] = useState(false);
       const [modal2, setModal2] = useState(false);
       const [details, setDetails] = useState([])
       // const [items, setItems] = useState(usersData)

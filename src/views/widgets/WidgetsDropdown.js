@@ -13,14 +13,14 @@ import ChartLineSimple from '../charts/ChartLineSimple'
 import ChartBarSimple from '../charts/ChartBarSimple'
 
 
-const WidgetsDropdown = () => {
+const WidgetsDropdown = ({ clientsNum, PartnersNum, PointsSaleNum }) => {
   //render
   return (
     <CRow>
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-primary"
-          header="9.823"
+          header={clientsNum + PartnersNum + PointsSaleNum}
           text="Utilisateurs"
           footerSlot={
             <ChartLineSimple
@@ -41,7 +41,7 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
-          header="9.823"
+          header={clientsNum}
           text="Clients"
           footerSlot={
             <ChartLineSimple
@@ -63,7 +63,7 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header="9.823"
+          header={PartnersNum}
           text="Partenaires"
           footerSlot={
             <ChartLineSimple
@@ -85,7 +85,7 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header="9.823"
+          header={PointsSaleNum}
           text="Points de ventes"
           footerSlot={
             <ChartBarSimple

@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { lazy, useEffect, useState } from 'react'
 import {
   CBadge,
   CButton,
@@ -13,16 +13,39 @@ import {
   CCallout
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
+import axios from 'axios'
 
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
+  const [data, setdata] = useState([])
+  useEffect(() => {
+    function fetching() {
+      const token = localStorage.getItem('userToken')
+      console.log(token)
+      const config = {
+        method: 'get',
+        url: 'http://192.168.1.14:8080/adminpanel',
+        headers: {
+          "Authorization": token
+        }
+
+      };
+      axios(config).then(res => {
+        setdata(res.data)
+        console.log(res.data['lastMonthActivity'][0])
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+    fetching()
+
+  }, [])
   return (
     <>
-      <WidgetsDropdown />
+      <WidgetsDropdown clientsNum={data['numberOfClients']} PartnersNum={data['numberOfPartners']} PointsSaleNum={data['numberOfSalesPoints']} />
       {/*  <CCard>
         <CCardBody>
           <CRow>
@@ -124,21 +147,21 @@ const Dashboard = () => {
                       <CCallout color="info">
                         <small className="text-muted">Nouveau Clients</small>
                         <br />
-                        <strong className="h4">9,123</strong>
+                        <strong className="h4">{data['lastMonthActivity'][0]}</strong>
                       </CCallout>
                     </CCol>
                     <CCol sm="4">
                       <CCallout color="danger">
                         <small className="text-muted">Nouveau partenaires</small>
                         <br />
-                        <strong className="h4">22,643</strong>
+                        <strong className="h4">{data['lastMonthActivity'][1]}</strong>
                       </CCallout>
                     </CCol>
                     <CCol sm="4">
                       <CCallout color="warning">
                         <small className="text-muted">Nouveau points de ventes</small>
                         <br />
-                        <strong className="h4">22,643</strong>
+                        <strong className="h4">{data['lastMonthActivity'][2]}</strong>
                       </CCallout>
                     </CCol>
 
